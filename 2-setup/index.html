@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const Title = React.createElement('div', {
+      className: 'title'
+    }, 'React tutorials');
+
+    const Image = React.createElement('img', {
+      src: 'http://lorempixel.com/200/200'
+    });
+
+    const List =
+      React.createElement('div', {},
+        React.createElement('ul', {},
+          [
+            React.createElement('li', {}, 'Đắc Nhân Tâm'),
+            React.createElement('li', {}, 'Những người khốn khổ'),
+            React.createElement('li', {}, 'Clean Code')
+          ]
+        )
+      )
+
+    const App = React.createElement('div', null, Title, Image, List);
+    const root = document.getElementById('root');
+    ReactDOM.render(App, root);
+  </script>
+</body>
+</html>

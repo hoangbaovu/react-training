@@ -7,10 +7,11 @@
   <title>Document</title>
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
-  <script>
+  <script type="text/babel">
     const Title = React.createElement('div', {
       className: 'title'
     }, 'React tutorials');
@@ -30,7 +31,26 @@
         )
       )
 
-    const App = React.createElement('div', null, Title, Image, List);
+      const Table =
+        <table>
+          <tr>
+            <th>Thứ 2</th>
+            <th>Thứ 3</th>
+            <th>THứ 4</th>
+          </tr>
+          <tr>
+            <td>Learn Javascript</td>
+            <td>Learn Nodejs</td>
+            <td>Learn React</td>
+          </tr>
+          <tr>
+            <td>Working Javascipt</td>
+            <td>Working Nodejs</td>
+            <td>Working React</td>
+          </tr>
+        </table>;
+
+    const App = React.createElement('div', null, Title, Image, List, Table);
     const root = document.getElementById('root');
     ReactDOM.render(App, root);
   </script>

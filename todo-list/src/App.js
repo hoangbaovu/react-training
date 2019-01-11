@@ -12,12 +12,15 @@ class App extends Component {
     ];
   }
 
+  onItemClicked() {
+  }
+
   render() {
     return (
       <div className="App">
         {
           this.TodoItem.length > 0 && this.TodoItem.map((item, index) => {
-            return <TodoItem key={index} item={item}/>
+            return <TodoItem key={index} item={item} onClick={this.onItemClicked} />
           })
         }
         {

@@ -2,9 +2,15 @@
   color: #333;
   font-weight: 300;
   font-size: 25px;
+  display: flex;
+  margin: 20px 0;
 }
 
 .TodoItem-complete {
   text-decoration: line-through;
   opacity: .5;
+}
+
+.TodoItem p {
+  margin: 0 10px;
 }

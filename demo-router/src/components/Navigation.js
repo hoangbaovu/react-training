@@ -39,6 +39,9 @@ class Navigation extends Component {
               <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink tag={Link} to="/products/">Products</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink tag={Link} to="/contact/">Contact</NavLink>
             </NavItem>
             <NavItem>

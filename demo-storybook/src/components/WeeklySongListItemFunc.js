@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './WeeklySongListItem.css';
 
 function WeeklySongListItemFunc(props) {
@@ -13,6 +14,18 @@ function WeeklySongListItemFunc(props) {
       <div className="view-count">{viewCount.toLocaleString()}</div>
     </div>
   );
-}
+};
+
+WeeklySongListItemFunc.defaultProps = {
+  viewCount: 0
+};
+
+WeeklySongListItemFunc.propTypes = {
+  order: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  singer: PropTypes.string.isRequired,
+  /** View count */
+  viewCount: PropTypes.number
+};
 
 export default WeeklySongListItemFunc;

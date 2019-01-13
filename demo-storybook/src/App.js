@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import WeeklySongListItem from './components/WeeklySongListItem'
+import WeeklySongListItemFunc from './components/WeeklySongListItemFunc'
 
 class App extends Component {
   render() {
@@ -10,6 +11,11 @@ class App extends Component {
         title="Anh Là Ai"
         singer="Phương Ly"
         viewCount={4000000} />
+      <WeeklySongListItemFunc
+        order="02"
+        title="Thằng Điên"
+        singer="JustaTee; Phương Ly"
+        viewCount={64000000} />
     </div>;
   }
 }

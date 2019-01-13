@@ -14,7 +14,7 @@ class WeeklySongListItem extends Component {
         </div>
         <div className="view-count">{viewCount.toLocaleString()}</div>
       </div>
-    )
+    );
   }
 }
 

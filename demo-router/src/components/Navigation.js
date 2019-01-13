@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
+  Container,
   Collapse,
   Navbar,
   NavbarToggler,
@@ -29,7 +30,7 @@ class Navigation extends Component {
 
   render() {
     return <Navbar color="light" light expand="md">
-      <div className="container">
+      <Container>
         <NavbarBrand tag={Link} to="/">Neo App</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -45,7 +46,7 @@ class Navigation extends Component {
             </NavItem>
           </Nav>
         </Collapse>
-      </div>
+      </Container>
     </Navbar>
   }
 }

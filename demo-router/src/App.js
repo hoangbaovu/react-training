@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigation from './components/Navigation';
-import Index from './pages/index';
-import About from './pages/about';
-import Contact from './pages/contact';
+import Index from './pages/Index';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 class App extends Component {
   render() {

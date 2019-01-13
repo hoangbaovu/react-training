@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import About from './pages/about';
 const Index = () => <h2>Home</h2>;
-const About = () => <h2>About</h2>;
 const Contact = () => <h2>Contact</h2>;
 
 class App extends Component {

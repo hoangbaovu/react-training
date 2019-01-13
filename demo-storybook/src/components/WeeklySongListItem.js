@@ -24,11 +24,9 @@ WeeklySongListItem.defaultProps = {
 
 WeeklySongListItem.propTypes = {
   order: PropTypes.string.isRequired,
-  // View Title
   title: PropTypes.string.isRequired,
-  // View Singer
   singer: PropTypes.string.isRequired,
-  /** View Count */
+  /** View count */
   viewCount: PropTypes.number
 };
 

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import About from './pages/about';
 import Navigation from './components/Navigation';
-const Index = () => <h2>Home</h2>;
-const Contact = () => <h2>Contact</h2>;
+import Index from './pages/index';
+import About from './pages/about';
+import Contact from './pages/contact';
 
 class App extends Component {
   render() {

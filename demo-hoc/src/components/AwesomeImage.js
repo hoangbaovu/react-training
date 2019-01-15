@@ -11,7 +11,7 @@ export default function({
         style={{
           width: `${width}px`,
           height: `${height}px`,
-          background: `url("${src}") center cover`,
+          backgroundImage: `url("${src}")`,
           borderRadius: "8px"
         }}>
     </div>

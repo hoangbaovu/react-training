@@ -29,8 +29,8 @@ class Products extends Component {
         <p>Providing best business solution for growing your business</p>
         <Container>
           <Row>
-            { products.map(product => (
-              <Col md="4" key={product.id}>
+            { products.map((product, index) => (
+              <Col md="4" key={index}>
                 <Card>
                   <CardImg top width="100%" src={ product.imageUrl } alt="" />
                   <CardBody>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Container, Row, Col, Card, CardImg, CardText, CardBody,
   CardTitle, Button } from 'reactstrap';
@@ -11,7 +12,15 @@ class Products extends Component {
       products: []
     };
   }
-  
+
+  componentDidMount() {
+    axios.get("https://qzw5004466.sse.codesandbox.io/products").then(res => {
+      this.setState({
+        products: res.data
+      });
+    });
+  }
+
   render() {
     const { products } = this.state;
     return ( 

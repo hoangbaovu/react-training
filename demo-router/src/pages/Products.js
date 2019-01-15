@@ -30,7 +30,7 @@ class Products extends Component {
         <Container>
           <Row>
             { products.map(product => (
-              <Col md="4">
+              <Col md="4" key={product.id}>
                 <Card>
                   <CardImg top width="100%" src={ product.imageUrl } alt="" />
                   <CardBody>

@@ -7,18 +7,22 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Products from './pages/Products';
 
+import { CartProvider } from './contexts/Cart';
+
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Navigation/>
-          <Route path="/" exact component={Index} />
-          <Route path="/products/" component={Products} />
-          <Route path="/about/" component={About} />
-          <Route path="/contact/" component={Contact} />
-        </div>
-      </Router>
+      <CartProvider>
+        <Router>
+          <div className="App">
+            <Navigation/>
+            <Route path="/" exact component={Index} />
+            <Route path="/products/" component={Products} />
+            <Route path="/about/" component={About} />
+            <Route path="/contact/" component={Contact} />
+          </div>
+        </Router>
+      </CartProvider>
     );
   }
 }

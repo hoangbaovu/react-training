@@ -11,6 +11,7 @@ import {
   NavLink,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../contexts/Cart';
 
 class Navigation extends Component {
   constructor(props) {
@@ -46,6 +47,13 @@ class Navigation extends Component {
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/about/">About</NavLink>
+            </NavItem>
+          </Nav>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <CartContext>
+                {({ cartItems }) => <NavLink tag={Link} to="/products/">Cart ({ cartItems.length })</NavLink>}
+              </CartContext>
             </NavItem>
           </Nav>
         </Collapse>

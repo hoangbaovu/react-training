@@ -5,17 +5,22 @@ import Counter from './components/Counter';
 
 const data = ["A", "B", "C"];
 
+// Provider Consumer
+const NumberContext = React.createContext();
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <List data={data} render={(item) => <div>{item}</div>}></List>
-        <List data={data} render={(item) => <div>+ {item}</div>}></List>
-        {/* <Counter render={value => <div>{value}</div>} /> */}
-        <Counter>
-          {/* {state => <div>{state.count}</div>} */}
-          {({count}) => <div>{count}</div>}
-        </Counter>
+        <NumberContext.Provider value={5}>
+          <NumberContext.Consumer>
+            {(context) => <h2>{context}</h2>}
+          </NumberContext.Consumer>
+          <Counter>
+            {/* {state => <div>{state.count}</div>} */}
+            {({count}) => <div>{count}</div>}
+          </Counter>
+        </NumberContext.Provider>
       </div>
     );
   }

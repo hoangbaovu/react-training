@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
-import List from './components/List';
 import Counter from './components/Counter';
-
-const data = ["A", "B", "C"];
+import NumberProvider from './components/NumberProvider';
+import NumberContext from './contexts/NumberContext';
 
 // Provider Consumer
-const NumberContext = React.createContext();
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <NumberContext.Provider value={5}>
+      <NumberProvider>
+        <div className="App">
           <NumberContext.Consumer>
-            {(context) => <h2>{context}</h2>}
+            {({number, updateNumber }) => <div>
+              <h2>{number}</h2>
+              <button onClick={updateNumber}>Update Number</button>
+            </div>}
           </NumberContext.Consumer>
-          <Counter>
-            {/* {state => <div>{state.count}</div>} */}
-            {({count}) => <div>{count}</div>}
-          </Counter>
-        </NumberContext.Provider>
-      </div>
+        </div>
+      </NumberProvider>
     );
   }
 }

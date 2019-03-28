@@ -11,6 +11,12 @@ class List extends Component {
   }
 
   render() {
+    const items = this.props.items;
+    const elmItem = items.map((item, index) => {
+      return (
+        <Item key={index} item={item} index={index} />
+      );
+    })
     return (
       <div className="panel panel-success">
         <div className="panel-heading">List Task</div>
@@ -24,7 +30,7 @@ class List extends Component {
             </tr>
           </thead>
           <tbody>
-            <Item />
+            { elmItem }
           </tbody>
         </table>
       </div>

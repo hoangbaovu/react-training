@@ -34,7 +34,9 @@ class App extends Component {
     return (
       <div>
         <Title />
-        <Control onClickAdd={this.handleToogleForm} />
+        <Control 
+          onClickAdd={this.handleToogleForm}
+          isShowForm={isShowForm} />
         {elmForm}
         <List items={items} />
       </div >

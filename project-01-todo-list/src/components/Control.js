@@ -18,13 +18,11 @@ class Control extends Component {
   }
 
   render() {
-    console.log(this.props.isShowForm);
-
     let elmButton = <button onClick={this.handleAdd} type="button" className="btn btn-info btn-block">Add Task</button>;
     if (this.props.isShowForm) {
       elmButton = <button onClick={this.handleAdd} type="button" className="btn btn-danger btn-block">Close Form</button>;
     }
-    
+
     return (
       <div className="row">
         <Search />

@@ -10,17 +10,32 @@ class App extends Component {
     super(props);
 
     this.state = {
-      items: tasks
-    }
+      items: tasks,
+      isShowForm: false
+    };
+
+    this.handleToogleForm = this.handleToogleForm.bind(this);
+  }
+
+  handleToogleForm() {
+    this.setState({
+      isShowForm: !this.state.isShowForm
+    });
   }
 
   render() {
     let items = this.state.items;
+    let isShowForm = this.state.isShowForm;
+    let elmForm = null;
+    if (isShowForm) {
+      elmForm = <Form />;
+    }
+
     return (
       <div>
         <Title />
-        <Control />
-        <Form />
+        <Control onClickAdd={this.handleToogleForm} />
+        {elmForm}
         <List items={items} />
       </div >
     );

@@ -13,7 +13,8 @@ class Item extends Component {
     let elmLevel = <span className="label label-default">Low</span>;
     if (level === 1) {
       elmLevel = <span className="label label-info">Medium</span>;
-    } else if (level === 2) {
+    }
+    if (level === 2) {
       elmLevel = <span className="label label-danger">High</span>;
     }
     return elmLevel;

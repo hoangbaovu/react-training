@@ -25,7 +25,7 @@ class Control extends Component {
 
     return (
       <div className="row">
-        <Search />
+        <Search onClickGo={this.props.onclickSearchGo}/>
         <Sort />
         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
           {elmButton}

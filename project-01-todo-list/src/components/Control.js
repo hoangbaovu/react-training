@@ -23,10 +23,16 @@ class Control extends Component {
       elmButton = <button onClick={this.handleAdd} type="button" className="btn btn-danger btn-block">Close Form</button>;
     }
 
+    let { orderBy, orderDir } = this.props;
+
     return (
       <div className="row">
-        <Search onClickGo={this.props.onclickSearchGo}/>
-        <Sort />
+        <Search onClickGo={this.props.onClickSearchGo}/>
+        <Sort
+          onClickSort={this.props.onClickSort}
+          orderBy={orderBy}
+          orderDir={orderDir}
+          />
         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
           {elmButton}
         </div>

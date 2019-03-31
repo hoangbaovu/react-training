@@ -12,7 +12,6 @@ class Sort extends Component {
   }
 
   handleSort(orderBy, orderDir) {
-    console.log("HandleSort", orderBy, orderDir);
     this.props.onClickSort(orderBy, orderDir);
   }
 

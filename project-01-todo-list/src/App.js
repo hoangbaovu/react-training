@@ -23,6 +23,7 @@ class App extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSort(orderBy, orderDir) {
@@ -60,13 +61,25 @@ class App extends Component {
     });
   }
 
+  handleSubmit(item) {
+    console.log(item);
+    let {items} = this.state;
+    items.push({
+      id: item.id,
+      name: item.name,
+      level: +item.level
+    });
+    this.setState({
+      items: items,
+      isShowForm: false
+    })
+  }
+
   render() {
     let itemsOrigin = [...this.state.items];
     let items = [];
     let elmForm = null;
     let { orderBy, orderDir, isShowForm, strSearch } = this.state;
-
-    console.log(orderBy, orderDir);
 
     // Search
     items = filter(itemsOrigin, (item) => {
@@ -77,7 +90,7 @@ class App extends Component {
     items = funcOrderBy(items, [orderBy], [orderDir]);
 
     if (isShowForm) {
-      elmForm = <Form onClickCancel={this.closeForm}/>;
+      elmForm = <Form onClickSubmit={this.handleSubmit} onClickCancel={this.closeForm}/>;
     }
 
     return (

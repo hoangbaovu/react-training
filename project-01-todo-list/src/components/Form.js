@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-const uuidv4 = require('uuid/v4');
 
 class Form extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
+      task_id: '',
       task_name: '',
       task_level: 0
     }
@@ -13,6 +13,30 @@ class Form extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    let item = this.props.itemSelected;
+
+    if (item !== null) {
+      this.setState({
+        task_id: item.id,
+        task_name: item.name,
+        task_level: item.level
+      })
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let item = nextProps.itemSelected;
+
+    if (nextProps !== null) {
+      this.setState({
+        task_id: item.id,
+        task_name: item.name,
+        task_level: item.level
+      })
+    };
   }
 
   handleCancel() {
@@ -25,13 +49,13 @@ class Form extends Component {
     const name = target.name;
 
     this.setState({
-      [name] : value
+      [name]: value
     });
   }
 
   handleSubmit(event) {
     let item = {
-      id: uuidv4(),
+      id: this.state.task_id,
       name: this.state.task_name,
       level: this.state.task_level
     }

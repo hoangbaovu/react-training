@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    let items = JSON.parse(localStorage.getItem('task'));
+    let items = JSON.parse(localStorage.getItem('task')) || [];
     this.setState({
       items: items
     });
@@ -122,7 +122,7 @@ class App extends Component {
   }
 
   render() {
-    let itemsOrigin = [...this.state.items];
+    let itemsOrigin = (this.state.items !== null) ? [...this.state.items] : [];
     let items = [];
     let elmForm = null;
     let { orderBy, orderDir, isShowForm, strSearch, itemSelected } = this.state;

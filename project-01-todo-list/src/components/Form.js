@@ -9,41 +9,31 @@ class Form extends Component {
       task_name: '',
       task_level: 0
     }
-
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
-    let item = this.props.itemSelected;
+    this.updateItem(this.props.itemSelected);
+  }
 
+  componentWillReceiveProps(nextProps) {
+    this.updateItem(nextProps.itemSelected);
+  }
+
+  updateItem(item) {
     if (item !== null) {
       this.setState({
         task_id: item.id,
         task_name: item.name,
         task_level: item.level
       })
-    };
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    let item = nextProps.itemSelected;
-
-    if (nextProps !== null) {
-      this.setState({
-        task_id: item.id,
-        task_name: item.name,
-        task_level: item.level
-      })
-    };
-  }
-
-  handleCancel() {
+  handleCancel = () => {
     this.props.onClickCancel();
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -53,7 +43,7 @@ class Form extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     let item = {
       id: this.state.task_id,
       name: this.state.task_name,

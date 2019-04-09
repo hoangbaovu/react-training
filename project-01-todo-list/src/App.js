@@ -5,7 +5,7 @@ import Form from './components/Form';
 import List from './components/List';
 import { filter, includes, orderBy as funcOrderBy, remove, reject } from 'lodash';
 
-import tasks from './mocks/tasks';
+// import tasks from './mocks/tasks';
 
 const uuidv4 = require('uuid/v4');
 
@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      items: tasks,
+      items: [],
       isShowForm: false,
       strSearch: '',
       orderBy: 'name',
@@ -29,6 +29,13 @@ class App extends Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    let items = JSON.parse(localStorage.getItem('task'));
+    this.setState({
+      items: items
+    });
   }
 
   handleSort(orderBy, orderDir) {
@@ -72,6 +79,8 @@ class App extends Component {
     this.setState({
       items: items
     });
+
+    localStorage.setItem('task', JSON.stringify(items));
   }
 
   handleSubmit(item) {
@@ -108,6 +117,8 @@ class App extends Component {
       items: items,
       isShowForm: false
     })
+
+    localStorage.setItem('task', JSON.stringify(items));
   }
 
   render() {

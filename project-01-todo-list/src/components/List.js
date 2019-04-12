@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Item from './Item';
 
 class List extends Component {
@@ -15,7 +16,7 @@ class List extends Component {
     const elmItem = items.map((item, index) => {
       return (
         <Item
-          onClickEdit={this.props.onClickEdit} 
+          onClickEdit={this.props.onClickEdit}
           onClickDelete={this.props.onClickDelete}
           key={index} item={item} index={index} />
       );
@@ -33,7 +34,7 @@ class List extends Component {
             </tr>
           </thead>
           <tbody>
-            { elmItem }
+            {elmItem}
           </tbody>
         </table>
       </div>
@@ -41,4 +42,8 @@ class List extends Component {
   }
 }
 
-export default List;
+const mapStateToProps = state => {
+  console.log(state);
+}
+
+export default connect(mapStateToProps, null)(List);

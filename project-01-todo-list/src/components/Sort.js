@@ -7,9 +7,18 @@ class Sort extends Component {
     this.state = {
 
     };
+
+    this.handleSort = this.handleSort.bind(this);
+  }
+
+  handleSort(orderBy, orderDir) {
+    this.props.onClickSort(orderBy, orderDir);
   }
 
   render() {
+    let { orderBy, orderDir } = this.props;
+    let stringSort = `${orderBy} - ${orderDir}`
+
     return (
       <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         <div className="dropdown">
@@ -17,13 +26,13 @@ class Sort extends Component {
             Sort by <span className="caret" />
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#" role="button">Name ASC</a></li>
-            <li><a href="#" role="button">Name DESC</a></li>
+            <li><a onClick={()=>this.handleSort('name', 'asc')} role="button">Name ASC</a></li>
+            <li><a onClick={()=>this.handleSort('name', 'desc')} role="button">Name DESC</a></li>
             <li role="separator" className="divider" />
-            <li><a href="#" role="button">Level ASC</a></li>
-            <li><a href="#" role="button">Level DESC</a></li>
+            <li><a onClick={()=>this.handleSort('level', 'asc')} role="button">Level ASC</a></li>
+            <li><a onClick={()=>this.handleSort('level', 'desc')} role="button">Level DESC</a></li>
           </ul>
-          <span className="label label-success label-medium">NAME - DESC</span>
+          <span className="label label-success label-medium">{ stringSort }</span>
         </div>
       </div>
     );

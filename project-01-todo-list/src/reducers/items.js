@@ -4,7 +4,7 @@ const initState = [
   { id: "A3", name: "hehe store", level: 2 },
 ];
 
-const items = (state = initState, action) => {
+const items = (state = [initState], action) => {
   switch (action.type) {
     case 'ClOSE_FORM':
       state = false;

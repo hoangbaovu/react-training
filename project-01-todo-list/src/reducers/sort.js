@@ -1,4 +1,4 @@
-const initState = { orderBy: 'name', orderDir: 'desc' };
+const initState = { orderBy: 'level', orderDir: 'asc' };
 
 const sort = (state = initState, action) => {
   let { orderBy, orderDir } = action

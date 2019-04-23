@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Title from './components/Title';
-import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import { filter, includes, orderBy as funcOrderBy, remove, reject } from 'lodash';
+import Search from './components/Search';
+import Sort from './components/Sort';
+import ToggleForm from './components/ToggleForm';
+
+import { remove, reject } from 'lodash';
 
 // import tasks from './mocks/tasks';
 
@@ -16,45 +19,14 @@ class App extends Component {
     this.state = {
       items: [],
       isShowForm: false,
-      strSearch: '',
       orderBy: 'name',
       orderDir: 'asc',
       itemSelected: null
     };
 
-    this.handleToogleForm = this.handleToogleForm.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSort = this.handleSort.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentWillMount() {
-    let items = JSON.parse(localStorage.getItem('task')) || [];
-    this.setState({
-      items: items
-    });
-  }
-
-  handleSort(orderBy, orderDir) {
-    this.setState({
-      orderBy: orderBy,
-      orderDir: orderDir
-    });
-  }
-
-  handleToogleForm() {
-    this.setState({
-      isShowForm: !this.state.isShowForm,
-      itemSelected: null
-    });
-  }
-
-  handleSearch(value) {
-    this.setState({
-      strSearch: value
-    });
   }
 
   handleEdit(item) {
@@ -81,21 +53,8 @@ class App extends Component {
     let id = null;
 
     if (item.id !== '') { //edit
-
       items = reject(items, { id: item.id });
       id = item.id;
-      // items.push({
-      //   id: item.id,
-      //   name: item.name,
-      //   level: +item.level
-      // });
-
-      // items.forEach((elm, key) => {
-      //   if (elm.id === item.id) {
-      //     items[key].name = item.name;
-      //     items[key].level = +item.level;
-      //   }
-      // });
     } else {
       id = uuidv4();
     }
@@ -115,27 +74,17 @@ class App extends Component {
   }
 
   render() {
-    let itemsOrigin = (this.state.items !== null) ? [...this.state.items] : [];
     // let items = [];
-    let { orderBy, orderDir, strSearch, itemSelected } = this.state;
-
-    // // Search
-    // items = filter(itemsOrigin, (item) => {
-    //   return includes(item.name.toLowerCase(), strSearch.toLowerCase())
-    // });
-
-    // // Sort
-    // items = funcOrderBy(items, [orderBy], [orderDir]);
+    let { itemSelected } = this.state;
 
     return (
       <div>
         <Title />
-        <Control
-          orderBy={orderBy}
-          orderDir={orderDir}
-          onClickSearchGo={this.handleSearch}
-          onClickSort={this.handleSort}
-          strSearch={this.props.strSearch} />
+        <div className="row">
+          <Search />
+          <Sort />
+          <ToggleForm />
+        </div>
         <Form itemSelected={itemSelected} onClickSubmit={this.handleSubmit} />
         <List
           onClickEdit={this.handleEdit}

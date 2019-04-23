@@ -1,16 +1,15 @@
+
+import * as types from '../constants/ActionTypes'
 const initState = false;
 
 const isShowForm = (state = initState, action) => {
   switch (action.type) {
-    case 'ClOSE_FORM':
-      state = false;
-      return state;
-    case 'OPEN_FORM':
-      state = true;
-      return state;
-    case 'TOGGLE_FORM':
-      state = !state;
-      return state;
+    case types.CLOSE_FORM:
+      return false;
+    case types.OPEN_FORM:
+      return true;
+    case types.TOGGLE_FORM:
+      return !state;
     default:
       return state;
   }

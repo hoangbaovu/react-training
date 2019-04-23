@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { actionOpenForm } from '../actions/index';
 class Item extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,7 @@ class Item extends Component {
   }
 
   handleEdit(item) {
-    this.props.onClickEdit(item);
+    this.props.editItem();
   }
 
   handleDelete(id) {
@@ -47,4 +48,18 @@ class Item extends Component {
   }
 }
 
-export default Item;
+const mapStateToProps = state => {
+  return {
+    isShowForm: state.isShowForm
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    editItem: () => {
+      dispatch(actionOpenForm());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { actionCloseForm } from '../actions/index';
 
 class Form extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class Form extends Component {
   }
 
   handleCancel = () => {
-    this.props.onClickCancel();
+    this.props.handleCancel();
   }
 
   handleChange = (event) => {
@@ -54,6 +56,10 @@ class Form extends Component {
   }
 
   render() {
+    let { isShowForm } = this.props;
+    if (isShowForm === false) {
+      return null;
+    }
     return (
       <div className="row">
         <div className="col-md-offset-7 col-md-5">
@@ -80,4 +86,18 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapStateToProps = state => {
+  return {
+    isShowForm: state.isShowForm
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    handleCancel: () => {
+      dispatch(actionCloseForm());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

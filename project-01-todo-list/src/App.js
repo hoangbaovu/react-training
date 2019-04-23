@@ -23,7 +23,6 @@ class App extends Component {
     };
 
     this.handleToogleForm = this.handleToogleForm.bind(this);
-    this.closeForm = this.closeForm.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -55,12 +54,6 @@ class App extends Component {
   handleSearch(value) {
     this.setState({
       strSearch: value
-    });
-  }
-
-  closeForm() {
-    this.setState({
-      isShowForm: false
     });
   }
 
@@ -123,21 +116,16 @@ class App extends Component {
 
   render() {
     let itemsOrigin = (this.state.items !== null) ? [...this.state.items] : [];
-    let items = [];
-    let elmForm = null;
-    let { orderBy, orderDir, isShowForm, strSearch, itemSelected } = this.state;
+    // let items = [];
+    let { orderBy, orderDir, strSearch, itemSelected } = this.state;
 
-    // Search
-    items = filter(itemsOrigin, (item) => {
-      return includes(item.name.toLowerCase(), strSearch.toLowerCase())
-    });
+    // // Search
+    // items = filter(itemsOrigin, (item) => {
+    //   return includes(item.name.toLowerCase(), strSearch.toLowerCase())
+    // });
 
-    // Sort
-    items = funcOrderBy(items, [orderBy], [orderDir]);
-
-    if (isShowForm) {
-      elmForm = <Form itemSelected={itemSelected} onClickSubmit={this.handleSubmit} onClickCancel={this.closeForm} />;
-    }
+    // // Sort
+    // items = funcOrderBy(items, [orderBy], [orderDir]);
 
     return (
       <div>
@@ -147,10 +135,8 @@ class App extends Component {
           orderDir={orderDir}
           onClickSearchGo={this.handleSearch}
           onClickSort={this.handleSort}
-          onClickAdd={this.handleToogleForm}
-          isShowForm={isShowForm}
           strSearch={this.props.strSearch} />
-        {elmForm}
+        <Form itemSelected={itemSelected} onClickSubmit={this.handleSubmit} />
         <List
           onClickEdit={this.handleEdit}
           onClickDelete={this.handleDelete}

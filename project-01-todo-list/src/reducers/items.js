@@ -1,10 +1,8 @@
-const initState = [
-  { id: "A1", name: "coding store", level: 0 },
-  { id: "A2", name: "hihih store", level: 1 },
-  { id: "A3", name: "hehe store", level: 2 },
-];
+let initState = [];
 
-const items = (state = [initState], action) => {
+let tasks = JSON.parse(localStorage.getItem('task'));
+initState = (tasks !== null && tasks.length > 0) ? tasks : initState;
+const items = (state = initState, action) => {
   switch (action.type) {
     case 'ClOSE_FORM':
       state = false;

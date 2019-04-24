@@ -6,9 +6,7 @@ import Search from './components/Search';
 import Sort from './components/Sort';
 import ToggleForm from './components/ToggleForm';
 
-import { reject } from 'lodash';
-
-const uuidv4 = require('uuid/v4');
+// import { reject } from 'lodash';
 
 class App extends Component {
   constructor(props) {
@@ -19,48 +17,48 @@ class App extends Component {
       isShowForm: false,
       orderBy: 'name',
       orderDir: 'asc',
-      itemSelected: null
+      // itemSelected: null
     };
 
     this.handleEdit = this.handleEdit.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleEdit(item) {
     this.setState({
-      itemSelected: item,
+      // itemSelected: item,
       isShowForm: true
     });
   }
 
-  handleSubmit(item) {
-    let { items } = this.state;
-    let id = null;
+  // handleSubmit(item) {
+  //   let { items } = this.state;
+  //   let id = null;
 
-    if (item.id !== '') { //edit
-      items = reject(items, { id: item.id });
-      id = item.id;
-    } else {
-      id = uuidv4();
-    }
+  //   if (item.id !== '') { //edit
+  //     items = reject(items, { id: item.id });
+  //     id = item.id;
+  //   } else {
+  //     id = uuidv4();
+  //   }
 
-    items.push({
-      id,
-      name: item.name,
-      level: +item.level
-    });
+  //   items.push({
+  //     id,
+  //     name: item.name,
+  //     level: +item.level
+  //   });
 
-    this.setState({
-      items: items,
-      isShowForm: false
-    })
+  //   this.setState({
+  //     items: items,
+  //     isShowForm: false
+  //   })
 
-    localStorage.setItem('task', JSON.stringify(items));
-  }
+  //   localStorage.setItem('task', JSON.stringify(items));
+  // }
 
   render() {
     // let items = [];
-    let { itemSelected } = this.state;
+    // let { itemSelected } = this.state;
 
     return (
       <div>
@@ -70,7 +68,7 @@ class App extends Component {
           <Sort />
           <ToggleForm />
         </div>
-        <Form itemSelected={itemSelected} onClickSubmit={this.handleSubmit} />
+        <Form />
         <List
           onClickEdit={this.handleEdit}
         />

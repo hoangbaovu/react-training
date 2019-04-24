@@ -12,6 +12,13 @@ export const actionOpenForm = () => {
   }
 };
 
+export const actionSubmitForm = item => {
+  return {
+    type: types.SUBMIT_FORM,
+    item
+  }
+}
+
 export const actionToggleForm = () => {
   return {
     type: types.TOGGLE_FORM

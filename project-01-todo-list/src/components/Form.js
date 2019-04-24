@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actionCloseForm, actionSubmitForm } from '../actions/index';
+import { actionCloseForm, actionSubmitForm, actionUnSelectItem } from '../actions/index';
 
 class Form extends Component {
   constructor(props) {
@@ -13,23 +13,23 @@ class Form extends Component {
     }
   }
 
-  // componentWillMount() {
-  //   this.updateItem(this.props.itemSelected);
-  // }
+  componentWillMount() {
+    this.updateItem(this.props.itemSelected);
+  }
 
-  // componentWillReceiveProps(nextProps) {
-  //   this.updateItem(nextProps.itemSelected);
-  // }
+  componentWillReceiveProps(nextProps) {
+    this.updateItem(nextProps.itemSelected);
+  }
 
-  // updateItem(item) {
-  //   if (item !== null) {
-  //     this.setState({
-  //       task_id: item.id,
-  //       task_name: item.name,
-  //       task_level: item.level
-  //     })
-  //   }
-  // }
+  updateItem(item) {
+    if (item !== null) {
+      this.setState({
+        task_id: item.id,
+        task_name: item.name,
+        task_level: item.level
+      })
+    }
+  }
 
   handleCancel = () => {
     this.props.handleCancel();
@@ -88,7 +88,8 @@ class Form extends Component {
 
 const mapStateToProps = state => {
   return {
-    isShowForm: state.isShowForm
+    isShowForm: state.isShowForm,
+    itemSelected: state.itemSelected
   }
 }
 
@@ -96,6 +97,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleCancel: () => {
       dispatch(actionCloseForm());
+      dispatch(actionUnSelectItem());
     },
     handleSubmit: item => {
       dispatch(actionSubmitForm(item));

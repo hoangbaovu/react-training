@@ -1,4 +1,4 @@
-import { remove } from 'lodash';
+import { remove, reject } from 'lodash';
 import * as types from '../constants/ActionTypes';
 import * as config from '../constants/Config';
 const uuidv4 = require('uuid/v4');
@@ -18,12 +18,21 @@ const items = (state = initState, action) => {
       localStorage.setItem(config.ITEMS_FROM_LOCAL_STORAGE, JSON.stringify(state));
       return [...state];
     case types.SUBMIT_FORM:
+      let { item } = action;
       id = uuidv4();
+      if (item.id !== '') { //edit
+        state = reject(state, { id: item.id });
+        id = item.id;
+      } else {
+        id = uuidv4();
+      }
+
       state.push({
         id,
-        name: action.item.name,
-        level: +action.item.level
+        name: item.name,
+        level: +item.level
       });
+
       localStorage.setItem(config.ITEMS_FROM_LOCAL_STORAGE, JSON.stringify(state));
       return [...state];
     default:

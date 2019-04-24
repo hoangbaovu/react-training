@@ -46,3 +46,16 @@ export const actionDeleteItem = id => {
     id
   }
 };
+
+export const actionSelectItem = item => {
+  return {
+    type: types.SELECT_ITEM,
+    item
+  }
+}
+
+export const actionUnSelectItem = () => {
+  return {
+    type: types.UNSELECT_ITEM
+  }
+}

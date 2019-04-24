@@ -9,57 +9,7 @@ import ToggleForm from './components/ToggleForm';
 // import { reject } from 'lodash';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      items: [],
-      isShowForm: false,
-      orderBy: 'name',
-      orderDir: 'asc',
-      // itemSelected: null
-    };
-
-    this.handleEdit = this.handleEdit.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleEdit(item) {
-    this.setState({
-      // itemSelected: item,
-      isShowForm: true
-    });
-  }
-
-  // handleSubmit(item) {
-  //   let { items } = this.state;
-  //   let id = null;
-
-  //   if (item.id !== '') { //edit
-  //     items = reject(items, { id: item.id });
-  //     id = item.id;
-  //   } else {
-  //     id = uuidv4();
-  //   }
-
-  //   items.push({
-  //     id,
-  //     name: item.name,
-  //     level: +item.level
-  //   });
-
-  //   this.setState({
-  //     items: items,
-  //     isShowForm: false
-  //   })
-
-  //   localStorage.setItem('task', JSON.stringify(items));
-  // }
-
   render() {
-    // let items = [];
-    // let { itemSelected } = this.state;
-
     return (
       <div>
         <Title />

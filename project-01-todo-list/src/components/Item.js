@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actionOpenForm } from '../actions/index';
+import { actionOpenForm, actionDeleteItem } from '../actions/index';
 class Item extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ class Item extends Component {
   }
 
   handleDelete(id) {
-    this.props.onClickDelete(id);
+    this.props.deleteItem(id);
   }
 
   showElementLevel(level) {
@@ -58,6 +58,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     editItem: () => {
       dispatch(actionOpenForm());
+    },
+    deleteItem: id => {
+      dispatch(actionDeleteItem(id));
     }
   }
 }

@@ -1,14 +1,20 @@
-let initState = [
-  {id: "A1", name: "codeing", level: 1},
-  {id: "A2", name: "Giặt áo", level: 0},
-  {id: "A3", name: "Giặt quần", level: 1},
-  {id: "A4", name: "Lau sàn", level: 2},
-];
+import { remove } from 'lodash';
+import * as types from '../constants/ActionTypes';
+import * as config from '../constants/Config';
 
-let tasks = JSON.parse(localStorage.getItem('task'));
+let initState = [];
+
+let tasks = JSON.parse(localStorage.getItem(config.ITEMS_FROM_LOCAL_STORAGE));
 initState = (tasks !== null && tasks.length > 0) ? tasks : initState;
 const items = (state = initState, action) => {
   switch (action.type) {
+    case types.DELETE_ITEM:
+      const id = action.id;
+      remove(state, (item) => {
+        return item.id === id;
+      });
+      localStorage.setItem(config.ITEMS_FROM_LOCAL_STORAGE, JSON.stringify(state));
+      return [...state];
     default:
       return state;
   }

@@ -6,9 +6,7 @@ import Search from './components/Search';
 import Sort from './components/Sort';
 import ToggleForm from './components/ToggleForm';
 
-import { remove, reject } from 'lodash';
-
-// import tasks from './mocks/tasks';
+import { reject } from 'lodash';
 
 const uuidv4 = require('uuid/v4');
 
@@ -25,7 +23,6 @@ class App extends Component {
     };
 
     this.handleEdit = this.handleEdit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -34,18 +31,6 @@ class App extends Component {
       itemSelected: item,
       isShowForm: true
     });
-  }
-
-  handleDelete(id) {
-    let items = this.state.items;
-    remove(items, (item) => {
-      return item.id === id;
-    });
-    this.setState({
-      items: items
-    });
-
-    localStorage.setItem('task', JSON.stringify(items));
   }
 
   handleSubmit(item) {
@@ -88,7 +73,6 @@ class App extends Component {
         <Form itemSelected={itemSelected} onClickSubmit={this.handleSubmit} />
         <List
           onClickEdit={this.handleEdit}
-          onClickDelete={this.handleDelete}
         />
       </div >
     );

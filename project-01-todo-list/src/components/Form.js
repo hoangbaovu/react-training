@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { actionCloseForm, actionSubmitForm, actionUnSelectItem } from '../actions/index';
 
 class Form extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class Form extends Component {
   }
 
   handleCancel = () => {
-    this.props.onClickCancel();
+    this.props.handleCancel();
   }
 
   handleChange = (event) => {
@@ -49,11 +51,15 @@ class Form extends Component {
       name: this.state.task_name,
       level: this.state.task_level
     }
-    this.props.onClickSubmit(item);
+    this.props.handleSubmit(item);
     event.preventDefault();
   }
 
   render() {
+    let { isShowForm } = this.props;
+    if (isShowForm === false) {
+      return null;
+    }
     return (
       <div className="row">
         <div className="col-md-offset-7 col-md-5">
@@ -80,4 +86,24 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapStateToProps = state => {
+  return {
+    isShowForm: state.isShowForm,
+    itemSelected: state.itemSelected
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    handleCancel: () => {
+      dispatch(actionCloseForm());
+      dispatch(actionUnSelectItem());
+    },
+    handleSubmit: item => {
+      dispatch(actionSubmitForm(item));
+      dispatch(actionCloseForm());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

@@ -12,6 +12,13 @@ export const actionOpenForm = () => {
   }
 };
 
+export const actionSubmitForm = item => {
+  return {
+    type: types.SUBMIT_FORM,
+    item
+  }
+}
+
 export const actionToggleForm = () => {
   return {
     type: types.TOGGLE_FORM
@@ -25,3 +32,30 @@ export const actionSort = (orderBy, orderDir) => {
     orderDir,
   }
 };
+
+export const actionSearch = search => {
+  return {
+    type: types.CHANGE_SEARCH,
+    search
+  }
+};
+
+export const actionDeleteItem = id => {
+  return {
+    type: types.DELETE_ITEM,
+    id
+  }
+};
+
+export const actionSelectItem = item => {
+  return {
+    type: types.SELECT_ITEM,
+    item
+  }
+}
+
+export const actionUnSelectItem = () => {
+  return {
+    type: types.UNSELECT_ITEM
+  }
+}

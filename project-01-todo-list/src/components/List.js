@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Item from './Item';
+import { filter, includes, orderBy as funcOrderBy } from 'lodash';
 
 class List extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-  }
-
   render() {
-    const items = this.props.items;
-    const elmItem = items.map((item, index) => {
-      return (
-        <Item
-          onClickEdit={this.props.onClickEdit}
-          onClickDelete={this.props.onClickDelete}
-          key={index} item={item} index={index} />
-      );
-    })
+    let { items, search, sort } = this.props;
+    let { orderBy, orderDir } = sort;
+    let itemsOrigin = (items !== null) ? [...items] : [];
+
+    // Search
+    items = filter(itemsOrigin, (item) => {
+      return includes(item.name.toLowerCase(), search.toLowerCase())
+    });
+
+    // // Sort
+    items = funcOrderBy(items, [orderBy], [orderDir]);
+
+    let elmItem = <tr><th colSpan={4}>Không có công việc</th></tr>;
+    if (items.length > 0) {
+      elmItem = items.map((item, index) => {
+        return (
+          <Item key={index} item={item} index={index} />
+        );
+      })
+    }
     return (
       <div className="panel panel-success">
         <div className="panel-heading">List Task</div>
@@ -43,7 +47,11 @@ class List extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  return {
+    items: state.items,
+    search: state.search,
+    sort: state.sort
+  }
 }
 
 export default connect(mapStateToProps, null)(List);

@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { actionSort } from '../actions/index';
 
 class Sort extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-
-    this.handleSort = this.handleSort.bind(this);
-  }
-
-  handleSort(orderBy, orderDir) {
-    this.props.onClickSort(orderBy, orderDir);
+  handleSort = (orderBy, orderDir) => {
+    this.props.sortItem(orderBy, orderDir);
   }
 
   render() {
-    let { orderBy, orderDir } = this.props;
+    let { orderBy, orderDir } = this.props.sort;
     let stringSort = `${orderBy} - ${orderDir}`
 
     return (
@@ -26,17 +18,31 @@ class Sort extends Component {
             Sort by <span className="caret" />
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a onClick={()=>this.handleSort('name', 'asc')} role="button">Name ASC</a></li>
-            <li><a onClick={()=>this.handleSort('name', 'desc')} role="button">Name DESC</a></li>
+            <li><a onClick={() => this.handleSort('name', 'asc')} role="button">Name ASC</a></li>
+            <li><a onClick={() => this.handleSort('name', 'desc')} role="button">Name DESC</a></li>
             <li role="separator" className="divider" />
-            <li><a onClick={()=>this.handleSort('level', 'asc')} role="button">Level ASC</a></li>
-            <li><a onClick={()=>this.handleSort('level', 'desc')} role="button">Level DESC</a></li>
+            <li><a onClick={() => this.handleSort('level', 'asc')} role="button">Level ASC</a></li>
+            <li><a onClick={() => this.handleSort('level', 'desc')} role="button">Level DESC</a></li>
           </ul>
-          <span className="label label-success label-medium">{ stringSort }</span>
+          <span className="label label-success label-medium">{stringSort}</span>
         </div>
       </div>
     );
   }
 }
 
-export default Sort;
+const mapStateToProps = state => {
+  return {
+    sort: state.sort
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    sortItem: (orderBy, orderDir) => {
+      dispatch(actionSort(orderBy, orderDir));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

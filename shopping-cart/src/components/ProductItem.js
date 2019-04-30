@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Helpers from '../libs/Helpers';
+import Validate from '../libs/Validate';
 
 function ProductItem(props) {
   let { product } = props;
+  let [quantity, setQuantity] = useState(1);
+
+  const handleClick = product => {
+
+    if (Validate.checkQuantity(quantity) === false) {
+      console.log("Validate");
+    } else {
+      console.log(`${+quantity} - ${product.id}`);
+    }
+  }
 
   const showAreaBuy = product => {
     let xhtml = null;
     let price = Helpers.toCurrency(product.price, 'USD', "right")
     if (product.canBuy === true) {
       xhtml = <>
-        <input name="quantity-product-1" type="number" defaultValue={1} min={1} />
-        <a data-product={1} href="/" className="price"> {price} </a>
+        <input value={quantity} onChange={e => setQuantity(e.target.value)} name="quantity-product-1" type="number" min={1} />
+        <a onClick={() => handleClick(product)} className="price"> {price} </a>
       </>
     } else {
       xhtml = <span className="price"> {price} </span>

@@ -1,9 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
-function Notify() {
+function Notify(props) {
+  let { notify } = props;
   return (
-    <div className="alert alert-success" role="alert" id="mnotification">Updated <b>ivysaur</b></div>
+    <div className="alert alert-success" role="alert" id="mnotification">{notify}</div>
   )
 }
 
-export default Notify;
+const mapStateToProps = state => {
+  return {
+    notify: state.notify
+  }
+}
+
+export default connect(mapStateToProps, null)(Notify);

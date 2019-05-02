@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Card, CardHeader, CardBody, Table } from 'reactstrap';
 import CartItem from './CartItem';
+import Notify from './Notify';
 
 function Cart(props) {
   let { items } = props;
@@ -53,7 +54,7 @@ function Cart(props) {
           </Table>
         </CardBody>
       </Card>
-      <div className="alert alert-success" role="alert" id="mnotification">Updated <b>ivysaur</b></div>
+      <Notify />
     </Col>
   )
 }

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Helpers from '../libs/Helpers';
 import Validate from '../libs/Validate';
+import { actionChangeNotify } from '../actions/index';
+import * as configs from '../constants/Config';
 
 function ProductItem(props) {
   let { product } = props;
@@ -9,10 +12,11 @@ function ProductItem(props) {
   const handleClick = product => {
 
     if (Validate.checkQuantity(quantity) === false) {
-      console.log("Validate");
+      props.changeNotify(configs.NOTI_GREATER_THAN_ONE);
     } else {
-      console.log(`${+quantity} - ${product.id}`);
+      props.changeNotify(configs.NOTI_ACTION_ADD);
     }
+    setQuantity(1);
   }
 
   const showAreaBuy = product => {
@@ -45,4 +49,11 @@ function ProductItem(props) {
   )
 }
 
-export default ProductItem;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    changeNotify: value => {
+      dispatch(actionChangeNotify(value));
+    }
+  }
+}
+export default connect(null, mapDispatchToProps)(ProductItem);

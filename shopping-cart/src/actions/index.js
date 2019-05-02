@@ -29,7 +29,7 @@ export const actionRemoveProduct = (product) => {
   }
 }
 
-export const actionChangeNotity = (content) => {
+export const actionChangeNotify = (content) => {
   return {
     type: types.CHANGE_NOTIFY,
     content

@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Helpers from '../libs/Helpers';
-import { actionRemoveProduct, actionChangeNotify } from '../actions/index';
+import { actionRemoveProduct, actionChangeNotify, actionUpdateProduct } from '../actions/index';
 import * as configs from '../constants/Config';
+import Validate from '../libs/Validate';
 
 function CartItem(props) {
   let { cartItem, index } = props;
   let { product } = cartItem;
   let [quantity, setQuantity] = useState(cartItem.quantity);
-
-  useEffect(() => {
-    document.title = `You clicked ${quantity} times`;
-  }, [quantity]);
 
   const showSubTotal = (price, quantity) => {
     return Helpers.toCurrency(price * quantity, 'USD', "right")
@@ -21,6 +18,16 @@ function CartItem(props) {
     props.removeProduct(product);
     props.changeNotify(configs.NOTI_ACTION_DELETE);
   }
+
+  const handleUpdate = (product, quantity) => {
+    if (Validate.checkQuantity(+quantity) === false) {
+      props.changeNotify(configs.NOTI_GREATER_THAN_ONE);
+    } else {
+      props.changeNotify(configs.NOTI_ACTION_UPDATE);
+      props.updateProduct(product, +quantity);
+    }
+  }
+
   return (
     <tr>
       <th scope="row">{index + 1}</th>
@@ -31,7 +38,7 @@ function CartItem(props) {
       </td>
       <td><strong>{showSubTotal(product.price, quantity)}</strong></td>
       <td>
-        <a className="badge badge-info update-cart-item" href="/" data-product>Update</a>
+        <a onClick={() => handleUpdate(product, quantity)} className="badge badge-info update-cart-item" data-product>Update</a>
         <a onClick={() => handleDelete(product)} className="badge badge-danger delete-cart-item" data-product>Delete</a>
       </td>
     </tr>
@@ -42,6 +49,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     removeProduct: product => {
       dispatch(actionRemoveProduct(product));
+    },
+    updateProduct: (product, quantity) => {
+      dispatch(actionUpdateProduct(product, quantity));
     },
     changeNotify: value => {
       dispatch(actionChangeNotify(value));

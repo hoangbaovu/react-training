@@ -15,7 +15,7 @@ function Cart(props) {
     if (items.length > 0) {
       xhtml = items.map((cartItem, index) => {
         return (
-          <CartItem key={index} index={index} cartItem={cartItem} />
+          <CartItem key={index + "-" + cartItem.quantity} index={index} cartItem={cartItem} />
         );
       });
     }

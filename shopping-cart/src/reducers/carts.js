@@ -3,7 +3,7 @@ import * as configs from './../constants/Config';
 
 let initState = [];
 let cartItems = JSON.parse(localStorage.getItem(configs.CARTS_FROM_LOCAL_STOGARE));
-initState = (cartItems !== null && cartItems > 0) ? cartItems : initState;
+initState = (cartItems !== null && cartItems.length > 0) ? cartItems : initState;
 
 let getProductPosition = (cartItems, product) => {
   const total = cartItems.length;
@@ -25,6 +25,7 @@ const carts = (state = initState, action) => {
       } else { // add
         state.push({ product, quantity });
       }
+      localStorage.setItem(configs.CARTS_FROM_LOCAL_STOGARE, JSON.stringify(state));
       return [...state];
     case types.UPDATE_PRODUCT:
       return state;

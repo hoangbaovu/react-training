@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import Helpers from '../libs/Helpers';
+import { actionRemoveProduct, actionChangeNotify } from '../actions/index';
+import * as configs from '../constants/Config';
 
 function CartItem(props) {
   let { cartItem, index } = props;
@@ -13,6 +16,11 @@ function CartItem(props) {
   const showSubTotal = (price, quantity) => {
     return Helpers.toCurrency(price * quantity, 'USD', "right")
   }
+
+  const handleDelete = product => {
+    props.removeProduct(product);
+    props.changeNotify(configs.NOTI_ACTION_DELETE);
+  }
   return (
     <tr>
       <th scope="row">{index + 1}</th>
@@ -24,10 +32,21 @@ function CartItem(props) {
       <td><strong>{showSubTotal(product.price, quantity)}</strong></td>
       <td>
         <a className="badge badge-info update-cart-item" href="/" data-product>Update</a>
-        <a className="badge badge-danger delete-cart-item" href="/" data-product>Delete</a>
+        <a onClick={() => handleDelete(product)} className="badge badge-danger delete-cart-item" data-product>Delete</a>
       </td>
     </tr>
   )
 }
 
-export default CartItem;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    removeProduct: product => {
+      dispatch(actionRemoveProduct(product));
+    },
+    changeNotify: value => {
+      dispatch(actionChangeNotify(value));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CartItem);

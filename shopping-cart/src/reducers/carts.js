@@ -12,8 +12,8 @@ let getProductPosition = (cartItems, product) => {
     if (cartItems[i].product.id === product.id) {
       return i;
     }
-    return -1;
   }
+  return -1;
 }
 
 const carts = (state = initState, action) => {

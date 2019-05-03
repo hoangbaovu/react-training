@@ -3,14 +3,14 @@ import { Row } from 'reactstrap';
 import './App.css';
 import Cart from './Cart';
 import Title from './Title';
-import ProductList from './ProductList';
+import ProductsContainer from '../containers/ProductsContainer';
 
 function App() {
   return (
     <div className="container-fluid">
       <Title />
       <Row>
-        <ProductList />
+        <ProductsContainer />
         <Cart />
       </Row>
     </div>
